@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.nesa.springboot_rms.kitchen.domain.repo.RecipeRepository;
 import com.nesa.springboot_rms.outlet.domain.Recipe;
 import com.nesa.springboot_rms.outlet.domain.RecipeIngredient;
-import com.nesa.springboot_rms.outlet.domain.repo.RecipeRepository;
+import com.nesa.springboot_rms.outlet.domain.extention.RecipeId;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +22,10 @@ public class RecipeApplicationService {
 
     public Recipe createRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
+    }
+
+    public Recipe get(RecipeId id) {
+        return recipeRepository.findById(id).orElse(null);
     }
     
 }

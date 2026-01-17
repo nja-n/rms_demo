@@ -3,6 +3,8 @@ package com.nesa.springboot_rms.common.supporter;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -35,6 +37,7 @@ public class Id implements Serializable{
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return value != null ? value.toString() : "";
     }
