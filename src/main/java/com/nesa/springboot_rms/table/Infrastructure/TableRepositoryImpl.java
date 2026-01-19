@@ -7,28 +7,19 @@ import com.nesa.springboot_rms.table.Domain.TableRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
-public class SqlTableRepository implements TableRepository {
+public class TableRepositoryImpl implements TableRepository {
     private final JpaTableRepository jpaRepo;
     private final Mapper<Table, TableJpaEntity> mapper;
 
     @Override
     public void save(Table table) {
         TableJpaEntity entity = mapper.toEntity(table);
-        // entity.setId(table.getId().value());
-        // entity.setCapacity(table.getCapacity());
-        // entity.setStatus(table.getStatus());
-        // entity.setName(table.getName());
-        // entity.setPosX(table.getPosX());
-        // entity.setPosY(table.getPosY());
-        // entity.setOutletId(table.getOutletId().value());
-        // entity.setWaiterId(table.getAssignedWaiterId());
         jpaRepo.save(entity);
     }
 
@@ -40,11 +31,12 @@ public class SqlTableRepository implements TableRepository {
 
     @Override
     public List<Table> saveAll(List<Table> tables) {
-        List<TableJpaEntity> entities = jpaRepo.saveAll(tables.stream()
-                .map(t -> mapper.toEntity(t))
-                .collect(Collectors.toList()));
-        return entities.stream()
-                .map(e -> mapper.toDomain(e))
+        List<TableJpaEntity> entities = tables.stream()
+                .map(mapper::toEntity)
+                .collect(Collectors.toList());
+
+        return jpaRepo.saveAll(entities).stream()
+                .map(mapper::toDomain)
                 .collect(Collectors.toList());
     }
     

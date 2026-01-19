@@ -3,7 +3,7 @@ package com.nesa.springboot_rms.table.Api.dtos;
 import lombok.Data;
 
 @Data
-public class TableDto {
+public class TableCreateDto {
 
     Long id;
     int capacity;
