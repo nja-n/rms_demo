@@ -21,4 +21,6 @@ public class Ingredient {
     // private String strDescription;
     // private String strThumb;
     // private String strType;
+
+    
 }
