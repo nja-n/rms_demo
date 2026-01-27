@@ -1,7 +1,7 @@
 package com.nesa.springboot_rms.table.Domain;
 
 public enum TableStatus {
-    FREE,
+    AVAILABLE,
     OCCUPIED,
     CLEANING;
 

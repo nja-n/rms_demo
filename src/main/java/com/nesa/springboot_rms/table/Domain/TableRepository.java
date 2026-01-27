@@ -9,6 +9,5 @@ public interface TableRepository {
     Optional<Table> findById(TableId id);
 
     List<Table> saveAll(List<Table> tables);
-
     List<Table> findAll();
 }

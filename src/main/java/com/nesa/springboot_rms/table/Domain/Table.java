@@ -1,72 +1,31 @@
 package com.nesa.springboot_rms.table.Domain;
 
 import com.nesa.springboot_rms.outlet.domain.extention.OutletId;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
+@AllArgsConstructor
 public class Table {
 
-    private final TableId id;
-    private final int capacity;
-    private TableStatus status;
+    private Long id;
+    private int capacity;
     private String name;
     private double posX;
     private double posY;
-    private OutletId outletId;
+    private Long outletId;
+    private TableStatus status;
 
-    // Constructor for creating new tables
-    public Table(
-        TableId id, 
-        int capacity, 
-        TableStatus status,
-        String name, double posX,
-            double posY, OutletId outletId) {
-        this.id = id;
-        this.capacity = capacity;
-        this.status = status;
-        this.name = name;
-        this.posX = posX;
-        this.posY = posY;
-        this.outletId = outletId;
+    // Logic: Tables are created as AVAILABLE by default if not specified
+    public static Table createNew(int capacity, String name, double x, double y, Long outletId, String status) {
+        return new Table(
+                null,
+                capacity,
+                name,
+                x,
+                y,
+                outletId,
+                status != null ? TableStatus.fromString(status) : TableStatus.AVAILABLE
+        );
     }
-
-    // // Constructor for reconstitution from persistence
-    // public Table(TableId id, int capacity, TableStatus status) {
-    // this.id = id;
-    // this.capacity = capacity;
-    // this.status = status;
-
-    // }
-
-    public void release() {
-        this.status = TableStatus.FREE;
-
-    }
-
-    public TableId getId() {
-        return id;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public TableStatus getStatus() {
-        return status;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPosX() {
-        return posX;
-    }
-
-    public double getPosY() {
-        return posY;
-    }
-
-    public OutletId getOutletId() {
-        return outletId;
-    }
-
 }
